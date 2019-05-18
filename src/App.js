@@ -1,46 +1,17 @@
 import React from 'react';
-import { login, saveProperty, saveUser, filterProperties } from './api';
-import './styles/app.scss';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Home } from './pages/home';
+import { Search } from './pages/search';
+import './styles/foundation/foundation.scss';
 
 function App() {
-
-  function saveNewUser() {
-    saveUser({
-      name: 'Rafael',
-      surname: 'Tome de Souza',
-      email: 'rafaeltomesouza@gmail.com'
-    }).then(() => console.log('salvo'));
-  }
-
-  function saveNewProperty() {
-    saveProperty({
-      address: 'Rua Guatemala, 330',
-      city: 'Araçatuba',
-      country: 'Brasil',
-      description: 'Lugar longe daqui',
-      user: 'rafaeltomesouza@gmail.com'
-    }).then(() => console.log('salvo'));
-  }
-
-  function showAll() {
-    filterProperties('Araçatuba');
-  }
-
   return (
-    <div className="App">
-      <div>
-        <button onClick={login}>Sign-in</button>
-      </div>
-      <div>
-        <button onClick={saveNewUser}>Save user</button>
-      </div>
-      <div>
-        <button onClick={saveNewProperty}>Save property</button>
-      </div>
-      <div>
-        <button onClick={showAll}>Show all properties</button>
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/search' component={Search} />
+      </Switch>
+    </Router>
   );
 }
 
